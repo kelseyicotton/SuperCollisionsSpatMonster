@@ -1,5 +1,5 @@
 #N canvas 707 25 615 404 12;
-#N canvas 0 25 1069 709 guts 0;
+#N canvas 0 25 1069 709 guts 1;
 #X obj 37 59 array define oneSound;
 #X obj 38 289 soundfiler;
 #X msg 38 267 read -resize \$1 oneSound;
@@ -93,8 +93,8 @@ need to convert the output to dB with rmstodb and also subtract by
 #X connect 16 1 2 0;
 #X restore 556 397 pd vu;
 #X obj 556 420 s \$0-vu-L;
-#X obj 593 352 catch~ oneSound_out;
-#X obj 687 419 dac~;
+#X obj 655 447 catch~ oneSound_out;
+#X obj 649 613 dac~;
 #X obj 935 288 < 7000;
 #X obj 935 312 sel 1;
 #X msg 831 375 \; oneSound const 0;
@@ -338,6 +338,8 @@ need to convert the output to dB with rmstodb and also subtract by
 #X obj 37 183 clone oneSound_mmc_player 29;
 #X obj 346 338 % 29, f 7;
 #X obj 528 157 adc~;
+#X obj 724 505 *~;
+#X obj 761 513 r stereo_volume;
 #X connect 1 0 5 0;
 #X connect 2 0 1 0;
 #X connect 3 0 4 0;
@@ -384,8 +386,7 @@ need to convert the output to dB with rmstodb and also subtract by
 #X connect 43 0 12 1;
 #X connect 43 0 54 0;
 #X connect 45 0 46 0;
-#X connect 47 0 48 0;
-#X connect 47 0 48 1;
+#X connect 47 0 64 0;
 #X connect 49 0 50 0;
 #X connect 50 0 51 0;
 #X connect 52 0 43 0;
@@ -398,6 +399,9 @@ need to convert the output to dB with rmstodb and also subtract by
 #X connect 62 0 16 0;
 #X connect 63 0 21 0;
 #X connect 63 0 45 0;
+#X connect 64 0 48 0;
+#X connect 64 0 48 1;
+#X connect 65 0 64 1;
 #X restore 235 242 pd guts;
 #X obj 92 35 tgl 200 0 record_play_rcv record_play empty 17 7 0 10
 #faff00 #000000 #000000 0 1;
@@ -416,6 +420,8 @@ tries to play past the end of the recording;
 #X obj 402 183 > 0;
 #X obj 403 237 s record_play;
 #X obj 402 212 change;
+#X obj 26 36 vsl 15 200 0 1 0 0 stereo_volume stereo_volume_rcv stereo_volume
+0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X connect 6 0 7 0;
 #X connect 6 1 7 1;
 #X connect 7 0 8 0;

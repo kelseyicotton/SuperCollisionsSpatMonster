@@ -1,4 +1,4 @@
-#N canvas 453 31 585 613 12;
+#N canvas 663 51 585 613 12;
 #X obj 155 371 tabread4~ oneSound, f 19;
 #X obj 285 185 random;
 #X obj 325 33 r length_samples;
@@ -50,6 +50,8 @@
 #X msg 335 458 set \$1;
 #X obj 353 428 i \$1;
 #X obj 371 400 loadbang;
+#X msg 452 381 1;
+#X obj 353 500 throw~ oneSound_out;
 #X connect 0 0 29 0;
 #X connect 1 0 4 0;
 #X connect 2 0 1 1;
@@ -80,6 +82,7 @@
 #X connect 27 0 9 1;
 #X connect 28 0 18 0;
 #X connect 29 0 41 0;
+#X connect 29 0 46 0;
 #X connect 30 0 29 1;
 #X connect 31 0 34 0;
 #X connect 32 0 33 0;

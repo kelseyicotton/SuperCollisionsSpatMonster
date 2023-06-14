@@ -66,6 +66,9 @@
 #X obj 540 236 / 127;
 #X obj 546 268 * 0.95;
 #X obj 553 306 + 0.05;
+#X floatatom 419 544 5 0 0 0 - - - 0;
+#X obj 459 493 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
 #X connect 0 0 28 0;
 #X connect 1 0 4 0;
 #X connect 2 0 1 1;
@@ -95,7 +98,6 @@
 #X connect 26 0 9 1;
 #X connect 27 0 18 0;
 #X connect 28 0 40 0;
-#X connect 28 0 45 0;
 #X connect 29 0 28 1;
 #X connect 30 0 33 0;
 #X connect 31 0 56 0;
@@ -111,6 +113,7 @@
 #X connect 38 0 29 0;
 #X connect 41 0 40 0;
 #X connect 42 0 41 0;
+#X connect 42 0 61 0;
 #X connect 43 0 42 0;
 #X connect 46 0 48 0;
 #X connect 47 0 52 0;
@@ -129,3 +132,4 @@
 #X connect 58 0 59 0;
 #X connect 59 0 60 0;
 #X connect 60 0 56 1;
+#X connect 62 0 42 0;

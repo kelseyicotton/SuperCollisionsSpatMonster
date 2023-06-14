@@ -1,5 +1,5 @@
 #N canvas 707 25 615 404 12;
-#N canvas 0 25 1069 709 guts 1;
+#N canvas 130 234 1069 709 guts 1;
 #X obj 37 59 array define oneSound;
 #X obj 38 289 soundfiler;
 #X msg 38 267 read -resize \$1 oneSound;
@@ -15,16 +15,16 @@
 #X obj 37 37 s all_random;
 #X obj 37 20 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 346 243 metro 200, f 12;
-#X msg 346 267 1;
-#X obj 346 291 + 1;
-#X floatatom 346 315 5 0 0 0 - - - 0;
-#X floatatom 346 360 5 0 0 0 - - - 0;
-#X obj 346 225 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#X obj 278 248 metro 200, f 12;
+#X msg 278 272 1;
+#X obj 278 296 + 1;
+#X floatatom 278 320 5 0 0 0 - - - 0;
+#X floatatom 278 365 5 0 0 0 - - - 0;
+#X obj 278 230 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
-#X obj 346 427 send, f 5;
-#X msg 378 404 symbol \$1_trigger;
-#X obj 346 382 t b f;
+#X obj 278 432 send, f 5;
+#X msg 310 409 symbol \$1_trigger;
+#X obj 278 387 t b f;
 #X obj 559 215 tabwrite~ oneSound;
 #X obj 594 32 tgl 15 0 empty record_play_rcv empty 17 7 0 10 #fcfcfc
 #000000 #000000 0 1;
@@ -45,11 +45,11 @@
 #X obj 37 88 loadbang;
 #X msg 37 110 220500;
 #X obj 37 132 array size oneSound;
-#X msg 346 199 0;
-#X msg 379 199 1;
-#X obj 392 291 random 15;
-#X obj 392 314 + 4;
-#X obj 432 199 + 120;
+#X msg 278 204 0;
+#X msg 311 204 1;
+#X obj 324 296 random 15;
+#X obj 324 319 + 4;
+#X obj 367 152 + 120;
 #X msg 593 309 \; oneSound normalize 1;
 #N canvas 329 161 611 388 vu 0;
 #X obj 59 111 env~ 1024;
@@ -98,10 +98,10 @@ need to convert the output to dB with rmstodb and also subtract by
 #X obj 935 288 < 7000;
 #X obj 935 312 sel 1;
 #X msg 831 375 \; oneSound const 0;
-#X obj 432 175 random 400;
-#X obj 367 153 sel 1 0;
-#X obj 447 232 s main_tempo;
-#X obj 372 127 r record_play_rcv;
+#X obj 366 117 random 400;
+#X obj 301 95 sel 1 0;
+#X obj 404 258 s main_tempo;
+#X obj 306 69 r record_play_rcv;
 #N canvas 29 25 398 464 voice_2 0;
 #X obj 24 209 metro 200, f 12;
 #X msg 24 233 1;
@@ -336,10 +336,28 @@ need to convert the output to dB with rmstodb and also subtract by
 #X restore 439 546 pd voice_2;
 #X msg 37 161 vis 5 1;
 #X obj 37 183 clone oneSound_mmc_player 29;
-#X obj 346 338 % 29, f 7;
+#X obj 278 343 % 29, f 7;
 #X obj 528 157 adc~;
 #X obj 724 505 *~;
 #X obj 761 513 r stereo_volume;
+#X obj 422 172 * 1;
+#X obj 767 46 ctlin 1 1;
+#X obj 476 76 / 127;
+#X obj 454 141 t b f;
+#X floatatom 483 167 5 0 0 0 - - - 0;
+#X floatatom 438 214 5 0 0 0 - - - 0;
+#X obj 476 100 * 2;
+#X obj 84 455 notein;
+#X obj 58 522 pack 0 0;
+#X obj 58 546 route 48;
+#X floatatom 58 570 5 0 0 0 - - - 0;
+#X obj 66 613 > 0;
+#X obj 67 667 s record_play;
+#X obj 66 642 change;
+#X obj 473 50 r trigger_rate;
+#X obj 767 70 s trigger_rate_rcv;
+#X obj 921 37 bendin, f 7;
+#X obj 921 61 s pitch_range_rcv;
 #X connect 1 0 5 0;
 #X connect 2 0 1 0;
 #X connect 3 0 4 0;
@@ -383,8 +401,7 @@ need to convert the output to dB with rmstodb and also subtract by
 #X connect 40 0 17 0;
 #X connect 41 0 42 0;
 #X connect 42 0 62 1;
-#X connect 43 0 12 1;
-#X connect 43 0 54 0;
+#X connect 43 0 66 0;
 #X connect 45 0 46 0;
 #X connect 47 0 64 0;
 #X connect 49 0 50 0;
@@ -402,6 +419,24 @@ need to convert the output to dB with rmstodb and also subtract by
 #X connect 64 0 48 0;
 #X connect 64 0 48 1;
 #X connect 65 0 64 1;
+#X connect 66 0 54 0;
+#X connect 66 0 12 1;
+#X connect 66 0 71 0;
+#X connect 67 0 81 0;
+#X connect 68 0 72 0;
+#X connect 69 0 66 0;
+#X connect 69 1 66 1;
+#X connect 69 1 70 0;
+#X connect 72 0 69 0;
+#X connect 73 0 74 0;
+#X connect 73 1 74 1;
+#X connect 74 0 75 0;
+#X connect 75 0 76 0;
+#X connect 76 0 77 0;
+#X connect 77 0 79 0;
+#X connect 79 0 78 0;
+#X connect 80 0 68 0;
+#X connect 82 0 83 0;
 #X restore 235 242 pd guts;
 #X obj 92 35 tgl 200 0 record_play_rcv record_play empty 17 7 0 10
 #faff00 #000000 #000000 0 1;
@@ -413,19 +448,9 @@ in conjunction with line? does it play backwards?;
 tries to play past the end of the recording;
 #X text 78 362 although the recording is only part of the table...
 ;
-#X obj 420 25 notein;
-#X obj 394 92 pack 0 0;
-#X obj 394 116 route 48;
-#X floatatom 394 140 5 0 0 0 - - - 0;
-#X obj 402 183 > 0;
-#X obj 403 237 s record_play;
-#X obj 402 212 change;
 #X obj 26 36 vsl 15 200 0 1 0 0 stereo_volume stereo_volume_rcv stereo_volume
 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
-#X connect 6 0 7 0;
-#X connect 6 1 7 1;
-#X connect 7 0 8 0;
-#X connect 8 0 9 0;
-#X connect 9 0 10 0;
-#X connect 10 0 12 0;
-#X connect 12 0 11 0;
+#X obj 381 51 vsl 15 128 0 127 0 0 trigger_rate trigger_rate_rcv trigger_rate
+0 -9 0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 466 53 vsl 15 128 0 16383 0 0 pitch_range pitch_range_rcv pitch_range
+0 -9 0 10 #fcfcfc #000000 #000000 0 1;
